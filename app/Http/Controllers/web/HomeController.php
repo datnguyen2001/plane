@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\AboutModel;
 use App\Models\BannerModel;
+use App\Models\BecomePilotModel;
 use App\Models\CertificateModel;
 use App\Models\ContactModel;
 use App\Models\ImageAboutModel;
@@ -34,8 +35,9 @@ class HomeController extends Controller
         $image = ImageAboutModel::all();
         $about = AboutModel::first();
         $partner = PartnerModel::where('display',1)->get();
+        $oneDayPilot = OneDayPilotModel::first();
 
-        return view('web.about.index',compact('image','about','partner'));
+        return view('web.about.index',compact('image','about','partner','oneDayPilot'));
     }
 
     public function certificate()
@@ -47,7 +49,9 @@ class HomeController extends Controller
 
     public function becomePilot()
     {
-        return view('web.become_pilot.index');
+        $data = BecomePilotModel::first();
+
+        return view('web.become_pilot.index',compact('data'));
     }
 
     public function onDayPilot()

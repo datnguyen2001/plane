@@ -24,12 +24,14 @@ class OneDayPilotController extends Controller
             $pilot->title = $request->get('title');
             $pilot->describe = $request->get('describe');
             $pilot->content = $request->get('content');
+            $pilot->iframe = $request->get('iframe');
             $pilot->save();
         }else{
             $pilots = new OneDayPilotModel([
                 'title'=>$request->get('title'),
                 'describe'=>$request->get('describe'),
                 'content'=>$request->get('content'),
+                'iframe'=>$request->get('iframe'),
             ]);
             $pilots->save();
         }

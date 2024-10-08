@@ -41,7 +41,7 @@
                         <ul class="f46 ">
                             <li class="f48 "><a href={{route('about')}}>Về chúng tôi</a></li>
                             <li class="f49 "><a href={{route('certificate')}}>Giấy chứng nhận</a></li>
-                            <li class="f50 "><a href=/khoa-huan-luyen-tro-thanh-phi-cong-252319>Trở thành phi công</a>
+                            <li class="f50 "><a href={{route('become-pilot')}}>Trở thành phi công</a>
                             </li>
                             <li class="f51 "><a href={{route('one-day-pilot')}}>Một ngày trở thành phi công</a>
                             </li>

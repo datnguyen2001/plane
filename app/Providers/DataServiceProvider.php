@@ -25,14 +25,12 @@ class DataServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-//        $setting = SettingModel::first();
-//        $menuHeader = TrainingCourseModel::select('title', 'slug')
-//            ->where('display', 1)
-//            ->where('type', 1)
-//            ->take(2)
-//            ->get();
-        $setting = null;
-        $menuHeader=[];
+        $setting = SettingModel::first();
+        $menuHeader = TrainingCourseModel::select('title', 'slug')
+            ->where('display', 1)
+            ->where('type', 1)
+            ->take(2)
+            ->get();
 
         view()->share('setting', $setting);
         view()->share('menuHeader', $menuHeader);

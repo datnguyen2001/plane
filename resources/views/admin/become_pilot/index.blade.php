@@ -10,28 +10,14 @@
         <div class="">
             <h1 class="h3 mb-4 text-gray-800">{{$titlePage}}</h1>
             <hr>
-            <form action="{{ route('admin.certificate.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.become-pilot.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row mt-3">
-                    <div class="col-2">Hình ảnh:</div>
+                    <div class="col-2">Tiêu đề bài viết:</div>
                     <div class="col-10">
-                        @if(@$data->src != null)
-                            <div class="form-control position-relative div-parent" style="padding-top: 50%">
-                                <div class="position-absolute w-100 h-100 div-file" style="top: 0; left: 0;z-index: 10">
-                                    <button type="button" class="position-absolute clear border-0 bg-danger p-0 d-flex justify-content-center align-items-center" style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%"><i class="bi bi-x-lg text-white"></i></button>
-                                    <img src="{{asset(@$data->src)}}" class="w-100 h-100" style="object-fit: cover">
-                                </div>
-                            </div>
-                        @else
-                            <div class="form-control position-relative" style="padding-top: 50%">
-                                <button type="button" class="position-absolute border-0 bg-transparent select-image" style="top: 50%;left: 50%;transform: translate(-50%,-50%)">
-                                    <i style="font-size: 30px" class="bi bi-download"></i>
-                                </button>
-                            </div>
-                        @endif
+                        <input type="text" class="form-control" name="name" required value="{{@$data->name}}">
                     </div>
                 </div>
-
                 <div class="card mt-3">
                     <div class="card-header bg-info text-white">
                         Nội dung
@@ -40,7 +26,109 @@
                         <textarea name="content" class="ckeditor" required>{!! @$data->content !!}</textarea>
                     </div>
                 </div>
-                <input type="file" name="file" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <div class="row mt-3">
+                    <div class="col-2">Tiêu đề 1 (mục nhỏ):</div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="title_one" value="{{@$data->title_one}}">
+                    </div>
+                </div>
+                @for($e=1;$e<=6;$e++)
+                    <div class="row mt-3">
+                        <div class="col-2">Tên mục nhỏ {{$e}}:</div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="name_{{$e}}"
+                                   value="{{old('name_'.$e, @$data->{'name_'.$e})}}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">Hình ảnh mục nhỏ {{$e}}:</div>
+                        <div class="col-5">
+                            @if(!empty($data->{'src_'.$e}))
+                                <div class="form-control position-relative div-parent{{$e}}" style="padding-top: 50%">
+                                    <div class="position-absolute w-100 h-100 div-file{{$e}}"
+                                         style="top: 0; left: 0;z-index: 10">
+                                        <button type="button"
+                                                class="position-absolute clear{{$e}} border-0 bg-danger p-0 d-flex justify-content-center align-items-center"
+                                                style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%">
+                                            <i class="bi bi-x-lg text-white"></i></button>
+                                        <img src="{{asset($data->{'src_'.$e})}}" class="w-100 h-100"
+                                             style="object-fit: cover">
+                                    </div>
+                                </div>
+                            @else
+                                <div class="form-control position-relative" style="padding-top: 50%">
+                                    <button type="button"
+                                            class="position-absolute border-0 bg-transparent select-image{{$e}}"
+                                            style="top: 50%;left: 50%;transform: translate(-50%,-50%)">
+                                        <i style="font-size: 30px" class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-header bg-info text-white">
+                            Nội dung mục nhỏ 1
+                        </div>
+                        <div class="card-body mt-2">
+                            <textarea name="content_{{$e}}" class="ckeditor">{!! @$data->content_1 !!}</textarea>
+                        </div>
+                    </div>
+                @endfor
+                <div class="row mt-3">
+                    <div class="col-2">Tiêu đề 2 (mục nhỏ):</div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="title_two"  value="{{@$data->title_two}}">
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header bg-info text-white">
+                        Nội dung 2 (mục nhỏ)
+                    </div>
+                    <div class="card-body mt-2">
+                            <textarea name="content_two" class="ckeditor"
+                                      >{!! @$data->content_two !!}</textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2">Tiêu đề 3 (mục nhỏ):</div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="title_three"  value="{{@$data->title_three}}">
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header bg-info text-white">
+                        Nội dung 3 (mục nhỏ)
+                    </div>
+                    <div class="card-body mt-2">
+                            <textarea name="content_three" class="ckeditor"
+                                      >{!! @$data->content_three !!}</textarea>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-2">Tiêu đề 4 (mục nhỏ):</div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="title_four"  value="{{@$data->title_four}}">
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header bg-info text-white">
+                        Nội dung 4 (mục nhỏ)
+                    </div>
+                    <div class="card-body mt-2">
+                            <textarea name="content_four" class="ckeditor"
+                                      >{!! @$data->content_four !!}</textarea>
+                    </div>
+                </div>
+
+
+                <input type="file" name="file1" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <input type="file" name="file2" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <input type="file" name="file3" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <input type="file" name="file4" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <input type="file" name="file5" accept="image/x-png,image/gif,image/jpeg" hidden>
+                <input type="file" name="file6" accept="image/x-png,image/gif,image/jpeg" hidden>
                 <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
         </div>
@@ -53,89 +141,77 @@
         CKEDITOR.replace('content', {
             filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form',
-            height:'700px'
+            height: '500px'
+        });
+        for ($i = 1; $i <= 6; $i++) {
+            CKEDITOR.replace(`content_${$i}`, {
+                filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form',
+                height: '400px'
+            });
+        }
+        CKEDITOR.replace('content_two', {
+            filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height: '500px'
+        });
+        CKEDITOR.replace('content_three', {
+            filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height: '500px'
+        });
+        CKEDITOR.replace('content_four', {
+            filebrowserUploadUrl: "{{route('admin.ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height: '500px'
         });
     </script>
     <script>
         let parent;
-        $(document).on("click", ".select-image", function () {
-            $('input[name="file"]').click();
-            parent = $(this).parent();
-        });
-        $('input[name="file"]').change(function(e){
-            imgPreview(this);
-        });
-        function imgPreview(input) {
-            let file = input.files[0];
-            let mixedfile = file['type'].split("/");
-            let filetype = mixedfile[0]; // (image, video)
-            if(filetype == "image"){
-                let reader = new FileReader();
-                reader.onload = function(e){
-                    $("#preview-img").show().attr("src", );
-                    let html = '<div class="position-absolute w-100 h-100 div-file" style="top: 0; left: 0;z-index: 10">' +
-                        '<button type="button" class="position-absolute clear border-0 bg-danger p-0 d-flex justify-content-center align-items-center" style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%"><i class="bi bi-x-lg text-white"></i></button>'+
-                        '<img src="'+e.target.result+'" class="w-100 h-100" style="object-fit: cover">' +
-                        '</div>';
-                    parent.html(html);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }else if(filetype == "video" || filetype == "mp4"){
-                let html = '<div class="position-absolute w-100 h-100 div-file" style="top: 0; left: 0;z-index: 10">' +
-                    '<button type="button" class="position-absolute clear border-0 bg-danger p-0 d-flex justify-content-center align-items-center" style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%;z-index: 14"><i class="bi bi-x-lg text-white"></i></button>'+
-                    '<video class="w-100 h-100" style="object-fit: cover" controls>\n' +
-                    '<source src="'+URL.createObjectURL(input.files[0])+'"></video>'+
-                    '</div>';
-                parent.html(html);
-            }else{
-                alert("Invalid file type");
-            }
-        }
-        $(document).on("click", "button.clear", function () {
-            parent = $(this).closest(".div-parent");
-            $(".div-file").remove();
-            let html = '<button type="button" class="position-absolute border-0 bg-transparent select-image" style="top: 50%;left: 50%;transform: translate(-50%,-50%)">\n' +
-                '                                    <i style="font-size: 30px" class="bi bi-download"></i>\n' +
-                '                                </button>';
-            parent.html(html);
-            $('input[type="file"]').val("");
-        });
+        for (let j = 1; j <= 6; j++) {
+            // Sự kiện chọn ảnh
+            $(document).on("click", `.select-image${j}`, function () {
+                $(`input[name="file${j}"]`).click();
+                parent = $(this).parent();
+            });
 
-        let parent2;
-        $(document).on("click", ".select-image2", function () {
-            $('input[name="img_logo"]').click();
-            parent2 = $(this).parent();
-        });
-        $('input[name="img_logo"]').change(function(e){
-            imgPreview2(this);
-        });
-        function imgPreview2(input) {
-            let file2 = input.files[0];
-            let mixedfile2 = file2['type'].split("/");
-            let filetype2 = mixedfile2[0];
-            if(filetype2 == "image"){
-                let reader2 = new FileReader();
-                reader2.onload = function(e){
-                    $("#preview-img2").show().attr("src", );
-                    let html = '<div class="position-absolute w-100 h-100 div-file2" style="top: 0; left: 0;z-index: 10">' +
-                        '<button type="button" class="position-absolute clear2 border-0 bg-danger p-0 d-flex justify-content-center align-items-center" style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%"><i class="bi bi-x-lg text-white"></i></button>'+
-                        '<img src="'+e.target.result+'" class="w-100 h-100" style="object-fit: cover">' +
-                        '</div>';
-                    parent2.html(html);
+            // Khi thay đổi ảnh
+            $(`input[name="file${j}"]`).change(function (e) {
+                imgPreview(e, this);
+            });
+
+            // Preview ảnh
+            function imgPreview(e, input) {
+                let file = input.files[0];
+                let mixedfile = file['type'].split("/");
+                let filetype = mixedfile[0];
+                if (filetype == "image") {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        let html = '<div class="position-absolute w-100 h-100 div-file' + j + '" style="top: 0; left: 0;z-index: 10">' +
+                            '<button type="button" class="position-absolute clear' + j + ' border-0 bg-danger p-0 d-flex justify-content-center align-items-center" style="top: -10px;right: -10px;width: 30px;height: 30px;border-radius: 50%"><i class="bi bi-x-lg text-white"></i></button>' +
+                            '<img src="' + event.target.result + '" class="w-100 h-100" style="object-fit: cover">' +
+                            '</div>';
+                        parent.html(html);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Invalid file type");
                 }
-                reader2.readAsDataURL(input.files[0]);
-            }else{
-                alert("Invalid file type");
             }
+
+            // Xóa ảnh
+            $(document).on("click", `.clear${j}`, function () {
+                parent = $(this).closest(`.div-parent${j}`);
+                $(`.div-file${j}`).remove();
+                let html = '<button type="button" class="position-absolute border-0 bg-transparent select-image' + j + '" style="top: 50%;left: 50%;transform: translate(-50%,-50%)">' +
+                    '<i style="font-size: 30px" class="bi bi-download"></i>' +
+                    '</button>';
+                parent.html(html);
+                $(`input[name="file${j}"]`).val("");
+            });
         }
-        $(document).on("click", "button.clear2", function () {
-            parent2 = $(this).closest(".div-parent2");
-            $(".div-file2").remove();
-            let html2 = '<button type="button" class="position-absolute border-0 bg-transparent select-image2" style="top: 50%;left: 50%;transform: translate(-50%,-50%)">\n' +
-                '                                    <i style="font-size: 30px" class="bi bi-download"></i>\n' +
-                '                                </button>';
-            parent2.html(html2);
-            $('input[type="img_qr"]').val("");
-        });
+
+
     </script>
 @endsection

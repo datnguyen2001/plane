@@ -33,6 +33,13 @@
                         <textarea name="content" class="ckeditor" required>{!! @$data->content !!}</textarea>
                     </div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-2">Iframe video:</div>
+                    <div class="col-10">
+                        <textarea name="iframe" id="iframe" required rows="4"
+                                  class="form-control">{!! @$data->iframe !!}</textarea>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
         </div>

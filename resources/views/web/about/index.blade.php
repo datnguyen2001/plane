@@ -77,21 +77,19 @@
                 <div class="col-md-6 m-b-60">
                     <div class="gt34 heading">
                         <p class="gt35 r65 text-left"></p>
-                        <h2 class="gt36 r66 text-left">TRẢI NGHIỆM BUỒNG LÁI MÁY BAY A320/321</h2>
+                        <h2 class="gt36 r66 text-left">{{@$oneDayPilot->title}}</h2>
                     </div>
-                    <p class="gt37 r67 text-left">Raymond đã triển khai gói dịch vụ bay trải nghiệm trong buồng lái mô
-                        phỏng máy bay A320/321. Tại đây các bạn sẽ được hướng dẫn thao tác điều khiển máy bay với hệ
-                        thống hình ảnh động có độ phân giải cao, tạo nên khung cảnh sân bay và ngoại cảnh như thực
-                        tế.</p>
-                    <p class="gt38 r68 text-left"><a href="/mot-ngay-tro-thanh-phi-cong-342525"
+                    <p class="gt37 r67 text-left">{{@$oneDayPilot->describe}}</p>
+                    <p class="gt38 r68 text-left"><a href="{{route('one-day-pilot')}}"
                                                      class="gt39 r69 btn btn-my">Xem chi tiết <i
                                 class="gt40 r70 fa fa-angle-right"></i></a></p>
                 </div>
                 <div class="col-md-6">
-                    <iframe width="560" height="315" style="width: 100%" src="//www.youtube.com/embed/PZaKlhaPCbI"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+{{--                    <iframe width="560" height="315" style="width: 100%" src="//www.youtube.com/embed/PZaKlhaPCbI"--}}
+{{--                            frameborder="0"--}}
+{{--                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"--}}
+{{--                            allowfullscreen></iframe>--}}
+                    {!! @$oneDayPilot->iframe !!}
                 </div>
             </div>
         </div>

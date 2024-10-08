@@ -20,30 +20,61 @@ class BecomePilotController extends Controller
     }
 
     public function save(Request $request){
-        $certificate = CertificateModel::first();
-        if ($certificate){
-            if ($request->hasFile('file')){
-                $file = $request->file('file');
-                $imagePath = Storage::url($file->store('banner', 'public'));
-                if (isset($about->src) && Storage::exists(str_replace('/storage', 'public', $certificate->src))) {
-                    Storage::delete(str_replace('/storage', 'public', $certificate->src));
+        $becomePilot = BecomePilotModel::first();
+        if ($becomePilot){
+            for ($i = 1; $i <= 6; $i++) {
+                if ($request->hasFile("file$i")) {
+                    $file = $request->file("file$i");
+                    $imagePath = Storage::url($file->store('banner', 'public'));
+
+                    $currentSrc = "src_$i";
+                    if (isset($becomePilot->$currentSrc) && Storage::exists(str_replace('/storage', 'public', $becomePilot->$currentSrc))) {
+                        Storage::delete(str_replace('/storage', 'public', $becomePilot->$currentSrc));
+                    }
+
+                    $becomePilot->$currentSrc = $imagePath;
                 }
-                $certificate->src = $imagePath;
             }
-            $certificate->content = $request->get('content');
-            $certificate->save();
+            $becomePilot->name = $request->get('name');
+            $becomePilot->title_one = $request->get('title_one');
+            $becomePilot->title_two = $request->get('title_two');
+            $becomePilot->title_three = $request->get('title_three');
+            $becomePilot->title_four = $request->get('title_four');
+            $becomePilot->content = $request->get('content');
+            for ($i = 1; $i <= 6; $i++) {
+                $becomePilot->{"name_$i"} = $request->get("name_$i");
+                $becomePilot->{"content_$i"} = $request->get("content_$i");
+            }
+            $becomePilot->content_two = $request->get('content_two');
+            $becomePilot->content_three = $request->get('content_three');
+            $becomePilot->content_four = $request->get('content_four');
+            $becomePilot->save();
         }else{
-            $imagePath = null;
-            if ($request->hasFile('file')){
-                $file = $request->file('file');
-                $imagePath = Storage::url($file->store('banner', 'public'));
+            $newData = [
+                'name' => $request->get('name'),
+                'title_one' => $request->get('title_one'),
+                'title_two' => $request->get('title_two'),
+                'title_three' => $request->get('title_three'),
+                'title_four' => $request->get('title_four'),
+                'content' => $request->get('content'),
+                'content_two' => $request->get('content_two'),
+                'content_three' => $request->get('content_three'),
+                'content_four' => $request->get('content_four'),
+            ];
+
+            for ($i = 1; $i <= 6; $i++) {
+                if ($request->hasFile("file$i")) {
+                    $file = $request->file("file$i");
+                    $newData["src_$i"] = Storage::url($file->store('banner', 'public'));
+                }
+
+                // Lấy tên và nội dung cho các mục nhỏ
+                $newData["name_$i"] = $request->get("name_$i");
+                $newData["content_$i"] = $request->get("content_$i");
             }
 
-            $certificate = new CertificateModel([
-                'content'=>$request->get('content'),
-                'src'=>$imagePath,
-            ]);
-            $certificate->save();
+            $becomePilot = new BecomePilotModel($newData);
+            $becomePilot->save();
         }
 
         return redirect()->back()->with(['success'=>"Lưu thông tin thành công"]);

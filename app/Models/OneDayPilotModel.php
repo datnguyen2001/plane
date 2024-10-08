@@ -13,5 +13,6 @@ class OneDayPilotModel extends Model
         'title',
         'describe',
         'content',
+        'iframe',
     ];
 }

@@ -25,7 +25,7 @@ class CertificateController extends Controller
             if ($request->hasFile('file')){
                 $file = $request->file('file');
                 $imagePath = Storage::url($file->store('banner', 'public'));
-                if (isset($about->src) && Storage::exists(str_replace('/storage', 'public', $certificate->src))) {
+                if (isset($certificate->src) && Storage::exists(str_replace('/storage', 'public', $certificate->src))) {
                     Storage::delete(str_replace('/storage', 'public', $certificate->src));
                 }
                 $certificate->src = $imagePath;
