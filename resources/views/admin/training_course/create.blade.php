@@ -74,7 +74,7 @@
                     <div class="row mt-3">
                         <div class="col-2">Sức khỏe:</div>
                         <div class="col-10">
-                        <textarea name="health" id="health" required rows="4"
+                        <textarea name="health" id="health" rows="4"
                                   class="form-control"></textarea>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                             Nội dung
                         </div>
                         <div class="card-body mt-2">
-                            <textarea name="content" class="ckeditor">{{ old('content') }}</textarea>
+                            <textarea name="content" class="ckeditor" required>{{ old('content') }}</textarea>
                         </div>
                     </div>
                     <div class="row mt-3">

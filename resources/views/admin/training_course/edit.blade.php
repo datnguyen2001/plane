@@ -75,7 +75,7 @@
                     <div class="row mt-3">
                         <div class="col-2">Sức khỏe:</div>
                         <div class="col-10">
-                        <textarea name="health" id="health" required rows="4"
+                        <textarea name="health" id="health" rows="4"
                                   class="form-control">{{$data->health}}</textarea>
                         </div>
                     </div>

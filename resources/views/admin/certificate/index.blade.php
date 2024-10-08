@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="form-control position-relative" style="padding-top: 50%">
+                            <div class="form-control position-relative div-parent" style="padding-top: 50%">
                                 <button type="button" class="position-absolute border-0 bg-transparent select-image" style="top: 50%;left: 50%;transform: translate(-50%,-50%)">
                                     <i style="font-size: 30px" class="bi bi-download"></i>
                                 </button>

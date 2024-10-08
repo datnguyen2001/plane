@@ -2,7 +2,16 @@
 @section('title','Trở thành phi công')
 
 @section('style_page')
-
+    <style>
+        .title_four{
+            background: #C82128;
+            padding: 14px 20px;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+    </style>
 @stop
 {{--content of page--}}
 @section('content')
@@ -194,7 +203,7 @@
                             </div>
                         @endif
                         @if(isset($data->title_four))
-                            <h2 class="pc10 pc10x text-center">{{@$data->title_four}}</h2>
+                            <h2 class="pc10 pc10x text-center title_four">{{@$data->title_four}}</h2>
                         @endif
                         @if(isset($data->content_four))
                             <div class="pc11 pc11-5">
